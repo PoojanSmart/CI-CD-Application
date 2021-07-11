@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&#38;display=swap"/>
+  
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+  <h:outputStylesheet  library="css" name="tempusdominus-bootstrap-4.min.css"/>
+  <h:outputStylesheet  library="css" name="all.min.css"/>
+  <h:outputStylesheet  library="css" name="tempusdominus-bootstrap-4.min.css"/>
+  <h:outputStylesheet  library="css" name="icheck-bootstrap.min.css"/>
+  <h:outputStylesheet library="css" name="icheck-bootstrap.min.css"/>
+  <h:outputStylesheet library="css" name="jqvmap.min.css"/>
+  <h:outputStylesheet library="css" name="adminlte.min.css"/>
+  <h:outputStylesheet library="css" name="OverlayScrollbars.min.css"/>
+  <h:outputStylesheet library="css" name="daterangepicker.css"/>
+  <h:outputStylesheet library="css" name="summernote-bs4.min.css"/>
+ 
+  
+<h:outputScript library="js" name="jquery.min.js"/>
+<h:outputScript library="js" name="jquery-ui.min.js"/>
+<h:outputScript library="js" name="bootstrap.bundle.min.js"/>
+<h:outputScript library="js" name="moment.min.js"/>
+<h:outputScript library="js" name="daterangepicker.js"/>
+<h:outputScript library="js" name="tempusdominus-bootstrap-4.min.js"/>
+<h:outputScript library="js" name="summernote-bs4.min.js"/>
+<h:outputScript library="js" name="jquery.overlayScrollbars.min.js"/>
+<h:outputScript library="js" name="adminlte.js"/>
+
+    </h:head>
+    <h:body>
+       
+       
+
+      <!-- Sidebar Menu -->
+          
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../resources/img/user.png" class="img-circle elevation-2" alt="User Image"/>
+        </div>
+        <div class="info">
+            <h4><a href="#" class="d-block">#{accessBean.loginUser.name}</a></h4>
+        </div>
+      </div>
+          
+      <nav class="mt-2 ">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <p>
+                Project
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                 
+                  <h:link outcome="/common/addProject.jsf" class="nav-link">
+                  <i class="fa fa-circle"></i>
+                  <p>Add Project</p>
+                </h:link>
+              </li>
+              <li class="nav-item">
+                   <h:link outcome="/common/home.jsf" class="nav-link">
+                 
+                  <i class="fa fa-circle"></i>
+                  <p>Show Project</p>
+                </h:link>
+              </li>
+            </ul>
+          </li>
+          
+<!--              <h:panelGroup rendered="#{accessBean.loginUser.globalRoleId.bulid eq 'true' or accessBean.loginUser.globalRoleId.buildHistory eq 'true'}">
+          
+          <li class="nav-item menu-open">
+              <a href="#" class="nav-link">
+              <p>
+               Project Build
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+                
+                <h:panelGroup rendered="#{accessBean.loginUser.globalRoleId.buildHistory eq 'true'}"> 
+              <li class="nav-item">
+                    <h:link outcome="/builddetail.jsf"  class="nav-link">
+            
+                  <i class="fa fa-circle"></i>
+                  <p>Build History</p>
+                </h:link>
+              </li>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{accessBean.loginUser.globalRoleId.bulid eq 'true'}"> 
+                
+              <li class="nav-item">
+                <h:link outcome="/build.jsf" class="nav-link">
+                  <i class="fa fa-circle "></i>
+                  <p>Build Setting</p>
+                </h:link>
+              </li>
+                </h:panelGroup>
+            </ul>
+          </li>
+      </h:panelGroup>-->
+     
+         
+          
+          
+          <h:panelGroup rendered="#{accessBean.loginUser.globalRoleId.credentialView eq 'true'}">
+          <li class="nav-item menu-open" >
+              <h:link outcome="/common/repocredential.jsf" class="nav-link">
+              <p>
+                Repo Credential
+              </p>
+            </h:link>
+          </li>
+          </h:panelGroup>
+
+          
+          <h:panelGroup rendered="#{accessBean.globalrole eq 'Admin'}">
+          <li class="nav-item menu-open" >
+              <h:link outcome="/admins/users.jsf" class="nav-link">
+              <p>
+                User
+              </p>
+            </h:link>
+          </li>
+          
+          
+          
+          
+          <li class="nav-item menu-open" >
+            <a href="#" class="nav-link">
+              <p>
+                Rights
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <h:link outcome="/admins/globalrole.jsf" class="nav-link">
+                  <i class="fa fa-circle"></i>
+                  <p>Global Rights</p>
+                </h:link>
+              </li>
+              <li class="nav-item">
+                <h:link outcome="/admins/localrole.jsf" class="nav-link">
+                  <i class="fa fa-circle"></i>
+                  <p>Local Rights</p>
+                </h:link>
+              </li>
+                
+              <li class="nav-item">
+                <h:link outcome="/admins/localroleuser.jsf" class="nav-link">
+                  <i class="fa fa-circle"></i>
+                  <p>Local User</p>
+                </h:link>
+              </li>
+                
+                
+            </ul>
+          </li>
+              </h:panelGroup>
+          
+        
+                    
+        <h:panelGroup >
+            
+            <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <p>
+                Others
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+          <li class="nav-item menu-open" >
+              <h:link outcome="/common/changePassword.jsf" class="nav-link">
+              <p>
+                Change Password
+              </p>
+            </h:link>
+          </li>
+            <li class="nav-item menu-open" >
+                <h:link outcome="/logout.jsf" class="nav-link">
+                    <p>Log out</p>
+                </h:link>
+            </li>
+            </ul>
+          </li>
+
+
+
+
+
+        </h:panelGroup>
+          
+        </ul>
+      </nav>
+
+   
+    </h:body>
+</html>
+
+        

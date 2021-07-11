@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"     
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+          
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <div class="sidebar">
+                <ui:insert name="sidebar">
+                    <ui:include src="../template/common.xhtml"/>
+                </ui:insert>
+            </div>
+        </aside>
+        
+        
+  <h:panelGroup rendered="#{accessBean.globalrole eq 'Admin'}">
+  
+        <div class="content-wrapper">
+    <div class="content-header">
+                 <center>
+
+      <div class="content-fluid">
+        <div class="row">
+            <div class="col-m-12" style="width:100%;">
+             
+              <div class="card card-primary"> 
+                  <div class="card-header">
+                      
+                      <h1 class="card-title" style="align-self:center;float:none!important">Projects</h1>
+              </div>
+        
+                  <section class="content">
+                      <div class="content-fluid">
+                          <div class="row">
+                              <div class="col-12">
+                                  <div class="card">
+                         
+                                      <div class="card-body">
+                                          <h:form id="form">
+            
+            
+            <h:dataTable  value="#{globalRoleBean.globalRoles}"  var="globalRole" border="1" binding="#{globalRoleBean.dataTableGlobalRoles}"
+                          styleClass="table table-striped"  style="padding:0!important;text-align:center;"
+                  
+                          
+                          >
+            <h:column>
+                <f:facet name="header">Role</f:facet>
+                <h:inputText class="form-control" required="true" requiredMessage="Required" style="align:center;" id="c_role" value="#{globalRoleBean.c_role}" rendered="#{not empty globalRoleBean.select_role_id and globalRoleBean.select_role_id eq globalRole.id}"/>
+                <h:message for="c_role" style="color:red;"/>    
+                <h:outputLabel rendered="#{globalRoleBean.select_role_id ne globalRole.id}">
+                #{globalRole.role}
+           </h:outputLabel>
+                <f:facet name="footer">
+                    <h:inputText class="form-control" id="role" requiredMessage="Required" value="#{globalRoleBean.role}" required="true"/>
+                    
+                    <h:message for="role" style="color:red;"/>
+                </f:facet>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Project Create</f:facet>
+                <h:selectBooleanCheckbox id="c_ProjectCreate" value="#{globalRoleBean.c_ProjectCreate}"  rendered="#{not empty globalRoleBean.select_role_id and globalRoleBean.select_role_id eq globalRole.id}">
+                </h:selectBooleanCheckbox>
+                <h:selectBooleanCheckbox value="#{globalRole.projectCreate}" disabled="true" rendered="#{globalRoleBean.select_role_id ne globalRole.id}">
+                </h:selectBooleanCheckbox>
+                <f:facet name="footer">
+                    <h:selectBooleanCheckbox id="projectCreate" value="#{globalRoleBean.projectCreate}"/>
+                </f:facet>
+            </h:column>
+                
+                
+            <h:column>
+                <f:facet name="header">Project Remove</f:facet>
+                
+                
+                <h:selectBooleanCheckbox  id="c_ProjectRemove" value="#{globalRoleBean.c_ProjectRemove}" rendered="#{not empty globalRoleBean.select_role_id and globalRoleBean.select_role_id eq globalRole.id}">
+                 </h:selectBooleanCheckbox>
+                
+                <h:selectBooleanCheckbox value="#{globalRole.projectRemove}" disabled="true" rendered="#{globalRoleBean.select_role_id ne globalRole.id}">
+                 </h:selectBooleanCheckbox>
+               <f:facet name="footer">
+                    <h:selectBooleanCheckbox id="projectRemove" value="#{globalRoleBean.projectRemove}"/>
+                </f:facet>
+            </h:column>
+                
+            
+            <h:column>
+                <f:facet name="header">Project Execute</f:facet>
+                <h:selectBooleanCheckbox id="c_ProjectExecute" value="#{globalRoleBean.c_ProjectExecute}" rendered="#{not empty globalRoleBean.select_role_id and globalRoleBean.select_role_id eq globalRole.id}">
+                </h:selectBooleanCheckbox>
+                <h:selectBooleanCheckbox value="#{globalRole.projectExecute}" disabled="true" rendered="#{globalRoleBean.select_role_id ne globalRole.id}">
+                </h:selectBooleanCheckbox>
+            <f:facet name="footer">
+                <h:selectBooleanCheckbox id="projectExecute" value="#{globalRoleBean.projectExecute}"/>
+                </f:facet>
+            </h:column>    
+                
+                
+            
+            <h:column>
+                <f:facet name="header">Build</f:facet>
+                <h:selectBooleanCheckbox id="c_Build" value="#{globalRoleBean.c_Build}" rendered="#{not empty globalRoleBean.select_role_id and globalRoleBean.select_role_id eq globalRole.id}">
+                </h:selectBooleanCheckbox>
+                <h:selectBooleanCheckbox value="#{globalRole.bulid}" disabled="true" rendered="#{globalRoleBean.select_role_id ne globalRole.id}">
+                </h:selectBooleanCheckbox>
+              <f:facet name="footer">
+                  <h:selectBooleanCheckbox id="build" value="#{globalRoleBean.build}"/>
+                </f:facet>
+            </h:column>        
+                
+                
+            
+            <h:column>
+                <f:facet name="header">Build History</f:facet>
+                <h:selectBooleanCheckbox id="c_BuildHistory" value="#{globalRoleBean.c_BuildHistory}"  rendered="#{not empty globalRoleBean.select_role_id and globalRoleBean.select_role_id eq globalRole.id}">
+                </h:selectBooleanCheckbox>
+                <h:selectBooleanCheckbox value="#{globalRole.buildHistory}" disabled="true" rendered="#{globalRoleBean.select_role_id ne globalRole.id}">
+                </h:selectBooleanCheckbox>
+                <f:facet name="footer">
+                    <h:selectBooleanCheckbox id="buildHistory" value="#{globalRoleBean.buildHistory}"/>
+                </f:facet>
+            </h:column>   
+            
+                
+               
+                
+            
+            <h:column>
+                <f:facet name="header">Credential View</f:facet>
+                <h:selectBooleanCheckbox id="c_CredentialView" value="#{globalRoleBean.c_CredentialView}" rendered="#{not empty globalRoleBean.select_role_id and globalRoleBean.select_role_id eq globalRole.id}">
+                </h:selectBooleanCheckbox>
+                <h:selectBooleanCheckbox value="#{globalRoleBean.globalRole.credentialView}" disabled="true" rendered="#{globalRoleBean.select_role_id ne globalRole.id}">
+                </h:selectBooleanCheckbox>
+              <f:facet name="footer">
+                  <h:selectBooleanCheckbox id="credentialView" value="#{globalRoleBean.credentialView}"/>
+                </f:facet>
+            </h:column>    
+                
+            
+            <h:column>
+                <f:facet name="header">Credential Create</f:facet>
+                <h:selectBooleanCheckbox id="c_CredentialCreate" value="#{globalRoleBean.c_CredentialCreate}" rendered="#{not empty globalRoleBean.select_role_id and globalRoleBean.select_role_id eq globalRole.id}">
+                </h:selectBooleanCheckbox>
+                <h:selectBooleanCheckbox value="#{globalRole.credentialCreate}" disabled="true" rendered="#{globalRoleBean.select_role_id ne globalRole.id}">
+                </h:selectBooleanCheckbox>
+              <f:facet name="footer">
+                  <h:selectBooleanCheckbox id="credentialCreate" value="#{globalRoleBean.credentialCreate}"/>
+                </f:facet>
+            </h:column>    
+                
+             
+                
+            <h:column>
+                <f:facet name="header">Credential Delete</f:facet>
+                <h:selectBooleanCheckbox id="c_CredentialDelete" value="#{globalRoleBean.c_CredentialDelete}"  rendered="#{not empty globalRoleBean.select_role_id and globalRoleBean.select_role_id eq globalRole.id}">
+                </h:selectBooleanCheckbox>
+                <h:selectBooleanCheckbox value="#{globalRole.credentialDelete}" disabled="true" rendered="#{globalRoleBean.select_role_id ne globalRole.id}">
+                </h:selectBooleanCheckbox>
+                
+            <f:facet name="footer">
+                <h:selectBooleanCheckbox id="credentialDelete" value="#{globalRoleBean.credentialDelete}" />
+                </f:facet>    
+            </h:column>
+                
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                
+                <h:panelGroup rendered="#{globalRoleBean.select_role_id eq globalRole.id }">
+                    <h:commandLink style="color:blue;" styleClass="fa fa-check"  value="" action="#{globalRoleBean.confirm()}"/>
+                    <h:commandLink immediate="true" style="color:red;" styleClass="fa fa-remove" value=""  action="#{globalRoleBean.cancel()}"/>
+                </h:panelGroup>
+              
+                <h:panelGroup rendered="#{globalRoleBean.select_role_id ne globalRole.id }">
+                    <h:commandLink immediate="true" style="color:green;" styleClass="fa fa-edit" value=""  action="#{globalRoleBean.select_role(globalRole)}"/>
+                  
+                    <h:commandLink immediate="true" style="color:red;" styleClass="fa fa-trash" value=""  action="#{globalRoleBean.removeGlobalRole(globalRole)}"/>
+                     
+                </h:panelGroup>
+                
+                
+                <f:facet name="footer">
+                    <h:commandButton class="btn btn-primary" value="Add role" action="#{globalRoleBean.addGlobalRole()}"/>
+                </f:facet>
+           
+            </h:column>
+            
+                  
+        </h:dataTable>
+             
+            </h:form>
+        
+                                      </div>
+                                  </div>
+                              </div>
+                              
+                          </div>
+                      </div>
+                  </section>
+               </div> 
+          </div>
+        </div>
+      </div>
+        </center>
+    </div>
+   
+  </div>
+      </h:panelGroup>
+         
+    <h:panelGroup rendered="#{accessBean.globalrole ne'Admin'}">
+        <div class="content-header">
+            <div class="content-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        403 ERROR PAGE
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="error-page">
+                <h2 class="headline text-danger">403</h2>
+                <div class="error-content">
+                    <h3>
+                        <i class="fa fa-exclamation text-danger"></i>
+                         Access is denied
+                    </h3>
+                    <p>
+                        You are forbidden to access this page  
+                        <a href="http://localhost:8080/CICDApp/common/index.jsf">Return to home page</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </h:panelGroup>      
+      
+    </h:body>
+</html>
+

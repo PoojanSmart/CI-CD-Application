@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"     
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <div class="sidebar">
+                <ui:insert name="sidebar">
+                    <ui:include src="../template/common.xhtml"/>
+                </ui:insert>
+            </div>
+        </aside>
+        
+        
+  
+        <div class="content-wrapper" style="min-height: 2168.88px;">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+              <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-6 card-header">
+                      <h1> Projects </h1>
+                  </div>
+                </div>
+              </div><!-- /.container-fluid -->
+            </section>
+            
+            <section class="content">
+                <div class="card card-default">
+
+        <h:messages/>
+        <h:form>
+                        <h:panelGroup rendered="#{not empty accessBean.loginUser.localRolesUserCollection}">
+                            <table style="padding:0!important;text-align:center;" width="100%" border="1" class="table table-striped">
+                                <tr>
+                                    <td>
+                                        <label>Project</label>
+                                    </td>
+                                    <td>
+                                        <label>Build</label>
+                                    </td>
+                                    <td>
+                                        <label>Details</label>
+                                    </td>
+                                    <td>
+                                        <label>Timer</label>
+                                    </td>
+                                    <td>
+                                        <label>Remove</label>
+                                    </td>
+                                </tr>
+                      <c:forEach var="data" items="#{showBean.project}">
+                    <h:panelGroup rendered="#{not empty showBean.checkLocalRights(accessBean.loginUser.userId,data.projectId)}">
+                        <tr>
+                            <td>
+                                <h:link outcome="projectDetail" value="#{data.projectName}" styleClass="btn btn-default btn-block btn-flat" >
+                                    <f:param name="projectId" value="#{data.projectId}"/>
+                                </h:link>
+                            </td>
+                            <td>
+                                
+                                <h:commandButton class="btn btn-info" value="Build" disabled="#{!accessBean.getHaveBuildRightsForProject(data.projectId)}" action="#{showBean.Build(data.projectId)}" />
+                            </td>
+                            <td>
+                                <h:commandButton class="btn btn-info" value="Build Details" disabled="#{!accessBean.getHaveBuildHistoryViewRights(data.projectId)}" action="#{showBean.goToBuildPage(data.projectId)}" />
+                            </td>
+                            <td>
+                                <h:commandButton class="btn btn-info"  rendered="#{showBean.getStateOfProjectTimer(data.projectName)}" value="Stop Timer" action="#{showBean.stopTimer(data.projectName)}" />
+                                <h:commandButton class="btn btn-info"  rendered="#{!showBean.getStateOfProjectTimer(data.projectName)}" value="Start Timer" action="#{showBean.startTimer(data.projectName)}" />
+                            </td>
+                            <td>
+                                <h:commandLink class="fa fa-trash" style="color:red;" value="" action="#{showBean.removeProject(data.projectId)}" rendered="#{accessBean.getHaveProjectRemoveRights(data.projectId)}"/>
+                            </td>
+                            
+                       </tr>
+                    </h:panelGroup>
+                </c:forEach>
+                                
+                        </table>
+                        </h:panelGroup>
+            <h:panelGroup rendered="#{empty accessBean.loginUser.localRolesUserCollection} "  >
+                <h:dataTable var="project" value="#{showBean.project}" border="1"         styleClass="table table-striped"  style="padding:0!important;text-align:center;"
+                 rendered="#{not empty showBean.checkLocalRights(accessBean.loginUser.userId,project.projectId)}" >
+
+                    <h:column>
+                        <f:facet name="header">
+                            Projects
+                        </f:facet>
+                        <h:link outcome="projectDetail" value="#{project.projectName}" styleClass="btn btn-default btn-block btn-flat" >
+                            <f:param name="projectId" value="#{project.projectId}"/>
+                        </h:link>
+
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Build</f:facet>
+                        <h:commandButton class="btn btn-info" disabled="true" value="Build" action="#{showBean.Build(project.projectId)}" />
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Build Details</f:facet>
+                        <h:commandButton class="btn btn-info" value="Build Details" disabled="true" action="#{showBean.goToBuildPage(project.projectId)}" />
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Timer State</f:facet>
+                        <h:commandButton class="btn btn-info"  rendered="#{showBean.getStateOfProjectTimer(project.projectName)}" value="Stop Timer" action="#{showBean.stopTimer(project.projectName)}" disabled="true" />
+                        <h:commandButton class="btn btn-info"  rendered="#{!showBean.getStateOfProjectTimer(project.projectName)}" value="Start Timer" action="#{showBean.startTimer(project.projectName)}" disabled="true" />
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Remove Project</f:facet>
+                        <h:commandLink class="fa fa-trash" style="color:red;" value="" action="#{showBean.removeProject(project.projectId)}" rendered="#{accessBean.getHaveProjectRemoveRights(project.projectId)}"/>
+                    </h:column>
+                    
+                    
+                </h:dataTable>
+            </h:panelGroup>
+           
+        </h:form>
+                </div>
+            </section>
+            <!-- /.content -->
+          </div>
+
+    </h:body>
+      <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.1.0
+    </div>
+    <strong>DEVELOPED BY PANKTI SHAH AND POOJAN SMART</strong> All rights reserved.
+  </footer>
+</html>

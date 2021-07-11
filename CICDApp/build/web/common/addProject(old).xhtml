@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <h:head>
+        <title>Facelet Title</title>
+        <script>
+            
+        </script>
+    </h:head>
+    <h:body> 
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <div class="sidebar">
+                <ui:insert name="sidebar">
+                    <ui:include src="../template/common.xhtml"/>
+                </ui:insert>
+            </div>
+        </aside>
+          
+        <div class="navigation">
+            <ui:insert name="navigation">
+                    <ui:include src="../template/navigationBar.xhtml"/>
+            </ui:insert>
+        </div>
+      
+      
+  <div class="content-wrapper">
+    <div class="content-header">
+                 <center>
+
+      <div class="content-fluid">
+        <div class="row">
+            <div class="col-m-12" style="width:100%;">
+             
+              <div class="card card-primary"> 
+                  <div class="card-header">
+                      
+                      <h1 class="card-title" style="align-self:center;">Add Project</h1>
+              </div>
+        <h:form id="addProject" style="width:100%;">
+                <p:messages id="messages" />
+
+            <h:panelGrid columns="2">
+                <p:outputLabel for="projectname" value="Project Name"/>
+                <p:inputText id="projectname" value="#{addBean.projectname}" class="form-control"/>
+                
+                
+                
+                
+                <p:outputLabel for="shellcommand" value="Shell Command"/>
+                <p:inputText id="shellcommand" value="#{addBean.shellcommand}" class="form-control"/>
+                
+                <p:outputLabel for="timeinterval" value="Time Interval"/>
+                <p:inputText id="timeinterval" value="#{addBean.timeinterval}" class="form-control"/>
+                
+                <p:outputLabel for="isPhysicalPath" value="Do you want to add project physicalpath?"/>
+                <p:selectBooleanCheckbox id="isPhysicalPath" value="#{addBean.isPhysicalPath}" class="form-check">
+                    <p:ajax event="change" update="physicalpath physicalpathlabel" listener="#{addBean.togglePhysicalPath()}" />
+                </p:selectBooleanCheckbox>
+                 
+                    <p:outputLabel id="physicalpathlabel" for="physicalpath" value="Physical Path" style="display:#{addBean.showPhysicalPath}"/>
+                    <p:inputText id="physicalpath" value="#{addBean.physicalpath}" style="display:#{addBean.showPhysicalPath}" class="form-control"/>
+                
+                
+                <p:outputLabel for="isGiturl" value="Do you want to add Git URL?"/>
+                <p:selectBooleanCheckbox id="isGiturl" value="#{addBean.isGiturl}" class="form-check">
+                    <p:ajax event="change"  update="gitUrl gitUrlLabel" listener="#{addBean.toggleGitUrl()}" />
+                </p:selectBooleanCheckbox>
+                
+                <p:outputLabel id="gitUrlLabel" for="gitUrl" value="Git URL" style="display:#{addBean.showGitUrl}"/>
+                    <p:inputText id="gitUrl" value="#{addBean.gitUrl}" class="form-control" style="display:#{addBean.showGitUrl}"/>
+                
+                <p:outputLabel for="isGitCredential" value="Do you want to add git credentials?"/>
+                <p:selectBooleanCheckbox id="isGitCredential" value="#{addBean.isGitCredential}" class="form-check">
+                    <p:ajax event="change"  update="gitusernameLabel gitpasswordLabel gitusername gitpassword" listener="#{addBean.toggleGitCred()}" />
+                </p:selectBooleanCheckbox>
+              
+                
+                    <p:outputLabel id="gitusernameLabel" for="gitusername" value="Git User Name" style="display:#{addBean.showGitCred}"/>
+                    <p:inputText id="gitusername" value="#{addBean.gitusername}" class="form-control" style="display:#{addBean.showGitCred}"/>
+                
+                
+                    <p:outputLabel id="gitpasswordLabel" for="gitpassword" value="Git Password" style="display:#{addBean.showGitCred}"/>
+                    <p:inputText id="gitpassword" value="#{addBean.gitpassword}" class="form-control" style="display:#{addBean.showGitCred}"/>
+                
+                
+                <h:commandButton id="btn" value="Add Project" action="#{addBean.addProject()}" class="btn btn-primary"/>
+                
+            </h:panelGrid> 
+                      
+        </h:form>
+
+                  </div> 
+          </div>
+        </div>
+      </div>
+        </center>
+    </div>
+   
+  </div>
+  
+    </h:body>
+    
+        
+        
+</html>
+

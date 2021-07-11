@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"     
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+          
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <div class="sidebar">
+                <ui:insert name="sidebar">
+                    <ui:include src="../template/common.xhtml"/>
+                </ui:insert>
+            </div>
+        </aside>
+        
+        
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  </nav>        
+        
+        <div class="content-wrapper">
+        <section class="content-header">
+              <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-6">
+                      <h1 class="card-header">Local Roles</h1>
+                  </div>
+                  <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item active">Project Add</li>
+                    </ol>
+                  </div>
+                </div>
+              </div><!-- /.container-fluid -->
+            </section>
+            
+    <section class="content">
+    <div class="card card-default">
+        
+        
+
+    <h:panelGroup rendered="#{accessBean.globalrole eq 'Admin'}">
+
+                <h:form>
+        <h:dataTable value="#{localRoleBean.localRoles}"  var="localRole"
+                     border="1" 
+                          styleClass="table table-striped"  style="padding:0!important;text-align:center;"
+                  
+                     
+                     >
+            <h:column>
+                <f:facet name="header">
+                    Role
+                </f:facet>
+                <h:inputText class="form-control" id="c_role" value="#{localRoleBean.c_role}" rendered="#{localRoleBean.select_role_id eq localRole.id}"/> 
+                <h:outputLabel value=" #{localRole.role}"  rendered="#{localRoleBean.select_role_id ne localRole.id}"/>
+                <f:facet name="footer">
+                    <h:inputText class="form-control" id="role" value="#{localRoleBean.role}"/>
+                </f:facet>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">
+                    Project
+                </f:facet>
+                <h:selectOneMenu class="form-control" id="c_ProjectId" value="#{localRoleBean.c_ProjectId}" rendered="#{localRoleBean.select_role_id eq localRole.id}">
+                    <c:forEach var="item" items="#{localRoleBean.projects}">
+                        <f:selectItem itemLabel="#{item.projectName}" itemValue="#{item.projectId}"/>
+                    </c:forEach>
+                </h:selectOneMenu>
+                <h:outputLabel value="#{localRole.projectId.projectName}" rendered="#{localRoleBean.select_role_id ne localRole.id}"/>
+                <f:facet name="footer">
+                    <h:selectOneMenu id="projectId" class="form-control" value="#{localRoleBean.projectId}">
+                        <f:selectItem itemLabel="--Select Project" itemValue="" noSelectionOption="true"/>
+                        <f:selectItems value="#{localRoleBean.projects}" var="data" itemLabel="#{data.projectName}" itemValue="#{data.projectId}"/>
+                    </h:selectOneMenu>
+                </f:facet>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Project Create</f:facet>
+                <h:selectBooleanCheckbox id="c_ProjectCreate" value="#{localRoleBean.c_ProjectCreate}"
+                                         rendered="#{localRoleBean.select_role_id eq localRole.id}"
+                                         />
+                
+                <h:selectBooleanCheckbox value="#{localRole.projectCreate}" rendered="#{localRoleBean.select_role_id ne localRole.id}" disabled="true"/>
+                <f:facet name="footer">
+                    <h:selectBooleanCheckbox id="projectCreate" value="#{localRoleBean.projectCreate}"/>
+                </f:facet>
+            </h:column>
+            
+            
+            <h:column>
+                <f:facet name="header">Project Remove</f:facet>
+                <h:selectBooleanCheckbox id="c_ProjectRemove" value="#{localRoleBean.c_ProjectRemove}" rendered="#{localRoleBean.select_role_id eq localRole.id}"/>
+                <h:selectBooleanCheckbox value="#{localRole.projectRemove}" rendered="#{localRoleBean.select_role_id ne localRole.id}" disabled="true"/>
+                <f:facet name="footer">
+                    <h:selectBooleanCheckbox id="projectRemove"  value="#{localRoleBean.projectRemove}"/>
+                </f:facet>
+            </h:column>
+            
+            
+            <h:column>
+                <f:facet name="header">Project Execute</f:facet>
+                   <h:selectBooleanCheckbox id="c_ProjectExecute" value="#{localRoleBean.c_ProjectExecute}" rendered="#{localRoleBean.select_role_id eq localRole.id}"/>
+                
+                <h:selectBooleanCheckbox value="#{localRole.projectExecute}" rendered="#{localRoleBean.select_role_id ne localRole.id}" disabled="true"/>
+                <f:facet name="footer">
+                    <h:selectBooleanCheckbox id="projectExecute" value="#{localRoleBean.projectExecute}"/>
+                </f:facet>
+            </h:column>
+            
+            
+            
+            <h:column>
+                <f:facet name="header">Build</f:facet>
+                <h:selectBooleanCheckbox id="c_Build" value="#{localRoleBean.c_Build}" rendered="#{localRoleBean.select_role_id eq localRole.id}"/>
+             
+                <h:selectBooleanCheckbox value="#{localRole.build}" rendered="#{localRoleBean.select_role_id ne localRole.id}" disabled="true"/>
+                <f:facet name="footer">
+                    <h:selectBooleanCheckbox id="build" value="#{localRoleBean.build}"/>
+                </f:facet>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Build History</f:facet>
+                <h:selectBooleanCheckbox id="c_buildHistory" value="#{localRoleBean.c_BuildHistory}" rendered="#{localRoleBean.select_role_id eq localRole.id}"/>
+             
+                <h:selectBooleanCheckbox value="#{localRole.buildHistory}" rendered="#{localRoleBean.select_role_id ne localRole.id}" disabled="true"/>
+                <f:facet name="footer">
+                    <h:selectBooleanCheckbox id="buildHistory" value="#{localRoleBean.buildHistory}"/>
+                </f:facet>
+            </h:column>
+            
+            
+            <h:column>
+                <f:facet  name="header">
+                    Action
+                </f:facet>
+                
+                <h:panelGroup rendered="#{localRoleBean.select_role_id ne localRole.id}">
+                    
+                    <h:commandLink  style="color:green;" styleClass="fa fa-edit" value="" action="#{localRoleBean.select_role(localRole)}"/>
+                <h:commandLink style="color:red;" styleClass="fa fa-trash" value=""  action="#{localRoleBean.removeLocalRole(localRole)}"/> 
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{localRoleBean.select_role_id eq localRole.id}">
+                   
+            <h:commandLink style="color:blue;" styleClass="fa fa-check" value="" action="#{localRoleBean.confirm()}"/>
+                    <h:commandLink  style="color:red;" styleClass="fa fa-remove" value="" action="#{localRoleBean.cancel()}"/>
+                    
+                </h:panelGroup>
+                
+                <f:facet name="footer">
+                    <h:commandButton  class="btn btn-primary" value="Add" action="#{localRoleBean.addLocalRole()}"/>
+                </f:facet>
+            </h:column>
+            
+        </h:dataTable>
+                </h:form>
+            </h:panelGroup>
+            </div>
+    </section>
+        </div> 
+        
+        
+    <h:panelGroup rendered="#{accessBean.globalrole ne'Admin'}">
+        <div class="content-header">
+            <div class="content-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        403 ERROR PAGE
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="error-page">
+                <h2 class="headline text-danger">403</h2>
+                <div class="error-content">
+                    <h3>
+                        <i class="fa fa-exclamation text-danger"></i>
+                         Access is denied
+                    </h3>
+                    <p>
+                        You are forbidden to access this page  
+                        <a href="http://localhost:8080/CICDApp/common/index.jsf">Return to home page</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </h:panelGroup>      
+      
+    </h:body>
+      <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.1.0
+    </div>
+    <strong>DEVELOPED BY PANKTI SHAH AND POOJAN SMART</strong> All rights reserved.
+  </footer>
+</html>
+

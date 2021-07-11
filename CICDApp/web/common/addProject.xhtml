@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <h:head>
+        <title>Facelet Title</title>
+        <script>
+            
+        </script>
+    </h:head>
+    <h:body> 
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <div class="sidebar">
+                <ui:insert name="sidebar">
+                    <ui:include src="../template/common.xhtml"/>
+                </ui:insert>
+            </div>
+        </aside>
+          
+
+        <div class="content-wrapper" style="min-height: 2168.88px;">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+              <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-6 card-header">
+                      <h1> Project Insert </h1>
+                  </div>
+                </div>
+              </div><!-- /.container-fluid -->
+            </section>
+        
+            <h:panelGroup rendered="#{accessBean.loginUser.globalRoleId.projectCreate}">
+
+                    <section class="content">
+                <div class="card card-default">
+                    
+                    
+                    
+                    <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Project Details</h3>
+
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+            
+                      <h:form id="myform" style="align:left;">
+                          <table>
+                              <tr>
+                                  <td>
+                                         <h:outputLabel for="projectname" value="Project Name"/>
+                       
+                                  </td>
+                                  <td>
+                                      <h:inputText id="projectname" value="#{addBean.projectname}" class="form-control"  />
+                
+                                  </td>
+                                  <td>
+                                      <h:message for="projectname" style="display:inline;color:red;font-weight: bold;"/>
+                                  </td>
+                              </tr>
+                
+                              <tr>
+                                  <td>
+                                             <h:outputLabel for="shellcommand" value="Shell Command"/>
+            
+                                  </td>
+                                  <td> 
+                                      <h:inputText id="shellcommand" value="#{addBean.shellcommand}" class="form-control" />
+               
+                
+                                  </td>
+                                  <td>
+                                      <h:message for="shellcommand"  style="display:inline;color:red;font-weight: bold;"/>
+                                  </td>
+                              </tr>
+                              
+                              
+                              <tr>
+                                  <td>
+                                       <h:outputLabel for="timeinterval" value="Time Interval"/>
+               
+                                  </td>
+                                  <td> 
+                                       <h:inputText id="timeinterval" value="#{addBean.timeinterval}" class="form-control" />
+               
+                                   </td>
+                                  <td>
+                                      <h:message for="timeinterval" style="display:inline;color:red;font-weight: bold;"/>
+                                  </td>
+                              </tr>
+                              
+                              <tr >
+                                  <td>
+                                      
+                                      <h:outputLabel for="isPhysicalPath"     value="Do you want to add project physicalpath?"/>
+              
+                                  </td>
+                                  <td>
+                                       <p:selectBooleanCheckbox id="isPhysicalPath" value="#{addBean.isPhysicalPath}" class="form-check">
+                                            <p:ajax event="change" update="physicalpatherr physicalpath physicalpathlabel" listener="#{addBean.togglePhysicalPath()}" />
+                                        </p:selectBooleanCheckbox>
+               
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                         <h:outputLabel id="physicalpathlabel" for="physicalpath" value="Physical Path" style="display:#{addBean.showPhysicalPath}"/>
+                 
+                                  </td>
+                                  <td>
+                                    <h:inputText id="physicalpath" value="#{addBean.physicalpath}" style="display:#{addBean.showPhysicalPath}" class="form-control" />
+                                  </td>
+                                  <td>
+                                      <h:message id="physicalpatherr" for="physicalpath"  style="display:#{addBean.showPhysicalPath};color:red;font-weight: bold;"/>
+                                  </td>
+                              </tr>
+                              
+                              
+                              <tr>
+                                  <td>
+                                      <h:outputLabel for="isGiturl" value="Do you want to add Git URL?"/>
+                                  </td>
+                                  <td>
+                                        <p:selectBooleanCheckbox id="isGiturl" value="#{addBean.isGiturl}" class="form-check">
+                                            <p:ajax event="change"  update="giturlerr gitUrl gitUrlLabel" listener="#{addBean.toggleGitUrl()}" />
+                                        </p:selectBooleanCheckbox>
+              
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                       <h:outputLabel id="gitUrlLabel" for="gitUrl" value="Git URL" style="display:#{addBean.showGitUrl}"/>
+                                  </td>
+                                  <td>
+                                         <h:inputText id="gitUrl" value="#{addBean.gitUrl}" class="form-control" style="display:#{addBean.showGitUrl}"/>
+                                  </td>
+                                  <td>
+                                      
+                                      <h:message  id="giturlerr" for="gitUrl"  style="display:#{addBean.showGitUrl};color:red;font-weight: bold;"/>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <h:outputLabel for="isGitCredential" value="Do you want to add git credentials?"/>
+                                  </td>
+                                  <td>
+                                        <p:selectBooleanCheckbox id="isGitCredential" value="#{addBean.isGitCredential}" class="form-check">
+                    <p:ajax event="change"  update="gitusernameerr gitpassworderr  gitusernameLabel gitpasswordLabel gitusername gitpassword" listener="#{addBean.toggleGitCred()}" />
+                </p:selectBooleanCheckbox>
+              
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                          <h:outputLabel id="gitusernameLabel" for="gitusername" value="Git User Name" style="display:#{addBean.showGitCred}"/>
+                
+                                  </td>
+                                  <td>
+                                     <h:inputText id="gitusername" value="#{addBean.gitusername}" class="form-control" style="display:#{addBean.showGitCred}" />
+                                  </td>
+                                  <td>
+                                      
+                                      <h:message id="gitusernameerr"  for="gitusername" style="display:#{addBean.showGitCred};color:red;font-weight: bold;"/>
+                                  </td>
+                              </tr>
+                              
+                              <tr>
+                                  <td>
+                                         <h:outputLabel id="gitpasswordLabel" for="gitpassword" value="Git Password" style="display:#{addBean.showGitCred}"/>
+                    
+                                  </td>
+                                  <td>
+                                                      <h:inputText id="gitpassword" value="#{addBean.gitpassword}" class="form-control" style="display:#{addBean.showGitCred}"/>
+                                  </td>
+                                  <td>
+                                      
+                                      <h:message id="gitpassworderr"  for="gitpassword" style="display:#{addBean.showGitCred};color:red;font-weight: bold;"/>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      
+                                  </td>
+                                  <td>
+                                                      <h:commandButton id="btn" value="Add Project" action="#{addBean.addProject()}" class="btn btn-primary"/>
+                                  </td>
+                              </tr>
+                              
+                              
+                              
+                          </table>
+                      
+                      </h:form>
+                        
+                      
+                    </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+
+                  </div>
+                </div>
+                  </div>
+            </section>
+                    
+                </h:panelGroup>
+            
+            <h:panelGroup rendered="#{!accessBean.loginUser.globalRoleId.projectCreate}">
+                    <div class="content-header">
+                <div class="content-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            403 ERROR PAGE
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="error-page">
+                    <h2 class="headline text-danger">403</h2>
+                    <div class="error-content">
+                        <h3>
+                            <i class="fa fa-exclamation text-danger"></i>
+                             Access is denied
+                        </h3>
+                        <p>
+                            You are forbidden to access this page  
+                            <h:link outcome="/common/home.jsf" value="Return to Home Page"/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+                
+            </h:panelGroup>
+
+
+            <!-- /.content -->
+          </div>
+    </h:body>
+    
+         <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.1.0
+    </div>
+    <strong>DEVELOPED BY PANKTI SHAH AND POOJAN SMART</strong> All rights reserved.
+  </footer> 
+        
+</html>
+

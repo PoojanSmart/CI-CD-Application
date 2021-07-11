@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+                
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <div class="sidebar">
+                <ui:insert name="sidebar">
+                    <ui:include src="../template/common.xhtml"/>
+                </ui:insert>
+            </div>
+        </aside>
+        
+        
+        
+        
+        
+        
+
+    <h:panelGroup rendered="#{accessBean.globalrole eq 'Admin'}">
+        <div class="content-wrapper">
+    <div class="content-header">
+                 <center>
+
+      <div class="content-fluid">
+        <div class="row">
+            <div class="col-m-12" style="width:100%;">
+             
+              <div class="card card-primary"> 
+                  <div class="card-header">
+                      
+                      <h1 class="card-title" style="align-self:center;float:none!important;">User</h1>
+              </div>
+        
+                  <section class="content">
+                      <div class="content-fluid">
+                          <div class="row">
+                              <div class="col-12">
+                                  <div class="card">
+                         
+                                      <div class="card-body">
+        <h:form id="form">
+            <h:dataTable var="user" value="#{userBean.users}" border="1"
+                          styleClass="table table-striped"  style="padding:0!important;text-align:center;"
+                  >
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:inputText class="form-control" id="name" value="#{userBean.name}" rendered="#{userBean.select_id eq user.userId}"/>
+                    
+                    <h:outputLabel  value="#{user.name}" rendered="#{userBean.select_id ne user.userId}" ></h:outputLabel>
+                   
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Email</f:facet>
+                    <h:inputText class="form-control" id="email" value="#{userBean.email}" rendered="#{userBean.select_id eq user.userId}"/>
+                    <h:outputLabel value="#{user.email}" rendered="#{userBean.select_id ne user.userId}"/>
+                    
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Role</f:facet>
+                     <h:selectOneMenu class="form-control" id="globalId" value="#{userBean.globalId}" rendered="#{userBean.select_id eq user.userId}">
+                         <c:forEach var="data" items="#{userBean.globalRoleses}">
+                             <f:selectItem itemLabel="#{data.role}" itemValue="#{data.id}"/> 
+                         </c:forEach> 
+                    </h:selectOneMenu>
+                    
+                    <h:outputLabel value="#{user.globalRoleId.role}" rendered="#{userBean.select_id ne user.userId}"/>
+                    
+                      
+                    
+                </h:column>
+                
+                
+                <h:column>
+                    <f:facet name="header">Receives Email</f:facet>
+                     
+                    <h:selectBooleanCheckbox id="receivesEmail" value="#{userBean.receivesEmail}"  rendered="#{userBean.select_id eq user.userId}"  />
+                     
+                    <h:selectBooleanCheckbox disabled="true"  value="#{user.receivesEmail}"  rendered="#{userBean.select_id ne user.userId}"  />
+                                        
+                    
+                   
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    
+                    <h:panelGroup rendered="#{userBean.select_id eq user.userId }">
+                    <h:commandLink style="color:blue;" styleClass="fa fa-check" action="#{userBean.confirm()}"/>
+                    
+                    <h:commandLink style="color:red;" styleClass="fa fa-remove" action="#{userBean.cancel()}"/>
+                </h:panelGroup>
+              
+                <h:panelGroup rendered="#{userBean.select_id ne user.userId}">
+                    <h:commandLink style="color:green;" styleClass="fa fa-edit" value=""  action="#{userBean.select_user(user)}"/>
+                  
+                    <h:commandLink style="color:red;" styleClass="fa fa-trash" value=""  action="#{userBean.removeUser(user)}"/>
+                     
+                </h:panelGroup>
+                
+                </h:column>
+                
+                
+            </h:dataTable>
+            
+        </h:form>
+                                          
+          
+                                      </div>
+                                  </div>
+                              </div>
+                              
+                          </div>
+                      </div>
+                  </section>
+               </div> 
+          </div>
+        </div>
+      </div>
+        </center>
+    </div>
+   
+  </div>               
+            </h:panelGroup>
+         
+    <h:panelGroup rendered="#{accessBean.globalrole ne'Admin'}">
+        <div class="content-header">
+            <div class="content-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        403 ERROR PAGE
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="error-page">
+                <h2 class="headline text-danger">403</h2>
+                <div class="error-content">
+                    <h3>
+                        <i class="fa fa-exclamation text-danger"></i>
+                         Access is denied
+                    </h3>
+                    <p>
+                        You are forbidden to access this page  
+                        <h:link  outcome="/common/index.jsf" value='Return to home page'/>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </h:panelGroup>      
+      
+    </h:body>
+</html>
+
