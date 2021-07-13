@@ -33,3 +33,9 @@ This project is meant to be helpful in **Devlopment operations** (DevOps) for In
 ###### ('run'){java \<name\>}
 
 ![Home Page](https://github.com/PoojanSmart/CI-CD-Application/blob/main/CICDApp/imgs/home.png)
+
+## Authentication
+* Global Roles-Application Level Rights
+* Local Roles-Project Level Rights
+
+# Base on rights users request serve
